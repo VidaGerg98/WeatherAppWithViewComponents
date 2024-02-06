@@ -1,0 +1,30 @@
+﻿@model CityWeather
+
+@{
+	string ColorByFahrenheit(int? fahrenheit) {
+		string colorClass = "";
+		if (fahrenheit < 44) {
+			colorClass = "blue-back";
+		}
+		else if (fahrenheit >= 44 && fahrenheit < 74) {
+			colorClass = "green-back";
+		}
+		else if (fahrenheit >= 74) {
+			colorClass = "orange-back";
+		}
+		return colorClass;
+	}
+}
+
+<div class="box cursor-pointer w-30 @ColorByFahrenheit(Model.TemperatureFahrenheit)">
+	<div class="flex-borderless">
+		<div class="w-50">
+			<h2>@Model.CityName</h2>
+			<h4>@Model.DateAndTime?.ToString("hh:mm tt")</h4>
+			<a href="~/weather/@Model.CityUniqueCode" class="margin-top">Details</a>
+		</div>
+		<div class="w-50 border-left">
+			<h1 class="margin-left">@Model.TemperatureFahrenheit <sup class="text-grey">&#8457</sup></h1>
+		</div>
+	</div>
+</div>
